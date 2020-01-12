@@ -6,15 +6,17 @@ import Sidebar from "../components/Sidebar"
 import AdCard from "../components/ad/index";
 import API from "../utils/API"
 
-
+const styles = {
+  page: {
+    "overflow-x": "hidden"
+  }
+}
 
 class Home extends Component {
 
-
-
   render() {
     return (
-      <Wrapper>
+      <Wrapper style = {styles.page}>
         <Sidebar className="fixed-top" />
        </Wrapper> 
 )}

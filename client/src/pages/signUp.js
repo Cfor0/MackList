@@ -78,7 +78,7 @@ class Login extends Component {
     render() {
         return (
             <Wrapper>
-                <h1 className="text-center">SignUp to Macklist!</h1><br />
+                <h2 className="text-center pt-3">SignUp to Macklist!</h2><br />
                 <div className="mx-5">
                     <Col>
                         <form onSubmit={this.handleFormSubmit}>
@@ -113,9 +113,9 @@ class Login extends Component {
                                 placeholder="Enter Password"
                                 required
                             />
-                            <button type="submit" className="btn btn-success mb-2">SignUp</button>
+                            <button type="submit" id="login-page-btn" className="btn btn-success mb-2">SignUp</button>
                         </form>
-                        <a className="btn btn-success" href="/login">LogIn</a><br />
+                        <a className="btn btn-success"id="login-page-btn1" href="/login">LogIn</a><br />
                     </Col>
                 </div>
             </Wrapper>

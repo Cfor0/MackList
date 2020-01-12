@@ -14,7 +14,10 @@ class Login extends Component {
         error: "",
         redirectTo: null
     }
-
+    style = {
+        padding: "15px",
+         }
+   
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -24,23 +27,7 @@ class Login extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-        // if (this.state.username && this.state.password) {
-        //     console.log(this.state.username)
-        //     API.loginUser([{
-        //         username: this.state.username,
-        //         password: this.state.password
-        //     }])
-        //     .then(results => {
-        //         console.log(results)
-        //         if(results.data === "success"){
-        //             window.location.href="/"
-        //                 }else{
-        //                     this.setState({error: "Username or Password is incorrect"})
-        //                 }
-        //     })
-        //     .catch(err => console.log(err));
-        // }
-
+        
         axios
             .post('/api/users/login', {
                 username: this.state.username,
@@ -74,7 +61,7 @@ class Login extends Component {
         } else {
         return (
             <Wrapper>
-                <h1 className="text-center">Login to Macklist!</h1><br/>
+                <h2 style = {this.style} className="text-center">Login</h2><br/>
                 <div className="mx-5">
                 <Col>
                 <form>
@@ -93,15 +80,17 @@ class Login extends Component {
                         type="password"
                         placeholder="Enter Password"
                     />
-                    <FormBtn
+                    <FormBtn 
+                        id="login-page-btn"
                         disabled={!(this.state.username && this.state.password)}
                         onClick={this.handleFormSubmit}
+                        
                     >
                         Log In
               </FormBtn>
                 </form>
-                <span>Don't remember your password? </span><a className="mt-2 text-success" href="/forgotPassword">Forgot Password</a><br/>
-                <span>Not a member yet?</span><a className="ml-2 text-success" href="/signup">Signup</a><br/>
+                <span>Don't remember your password? </span><a id="links" className="mt-2 text" href="/forgotPassword">Forgot Password</a><br/>
+                <span>Not a member yet?</span><a  id="links" className="ml-2 text" href="/signup">Signup</a><br/>
                 </Col>
                 </div>
             </Wrapper>

@@ -9,18 +9,6 @@ const userSchema = new Schema({
   password: { type: String, required: true}
 });
 
-// Define schema methods
-// userSchema.methods = {
-// 	hashPassword: plainTextPassword => {
-// 		return bcrypt.hashSync(plainTextPassword, 10)
-// 	}
-// }
-// userSchema.methods = {
-// 	checkPassword: function (inputPassword) {
-// 		return bcrypt.compareSync(inputPassword, this.password)
-// 	}
-// }
-
 userSchema.methods = {
 	checkPassword: function (inputPassword) {
 		return bcrypt.compareSync(inputPassword, this.password)

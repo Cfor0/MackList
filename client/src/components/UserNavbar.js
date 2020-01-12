@@ -1,9 +1,10 @@
 import React from "react";
-//import $ from "jquery";
+
+
 
   function UserNavbar(props) {
     return (
-      <div>
+      <div id="user-nav">
         <nav className="navbar navbar-light bg-light">
           <h1><a className="navbar-brand" href="/">Macklist</a></h1>
           <div className="nav-item dropdown">

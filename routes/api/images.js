@@ -37,7 +37,6 @@ const upload = multer({
 // adRouter.route("../client/src/pages/user-post")
 router.post("/", upload.single("productImage"), (req, res, next)=>{
     console.log(req.file);
-    console.log("Hi " +uploadDir)
     db.Ad.create({
         owner: req.body.owner ,
         productTitle:req.body.productTitle,

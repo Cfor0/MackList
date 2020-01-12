@@ -6,6 +6,7 @@ import { Department } from "../utils/department"
 import Axios from "axios";
 
 class Form extends Component {
+  
   // Setting the component's initial state
   state = {
     owner: "",
@@ -24,9 +25,7 @@ class Form extends Component {
     message: "",
 
     cities: []
-    // this.handleFormSubmit = this.handleFormSubmit.bind(this)
-    // this.handleInputChange = this.handleInputChange.bind(this),
-    // this.fileUpload = this.fileUpload.bind(this)
+    
   };
 
   updateCities = () => {
@@ -41,16 +40,16 @@ class Form extends Component {
       }
     })
     this.setState({ cities: arr1 })
-    console.log(this.state.cities)
   }
 
   handleInputChange = event => {
+
     // Getting the value and name of the input which triggered the change
     const { name, value } = event.target;
     this.setState({
       [name]: value 
     });
-    // this.setState({ productImage: event.target.pr[0] })
+    
   };
 
   handleFileChange = event => {
@@ -61,66 +60,42 @@ class Form extends Component {
     console.log(event.target.files[0]);
   };
   handleFormSubmit = event => {
+
     // Preventing the default behavior of the form submit (which is to refresh the page)
+    
     event.preventDefault();
 
-    const formData = new FormData();
-    //formData.append("productImage", this.state.productImage)
-    formData.append("owner", this.props.user)
-    formData.append("productTitle", this.state.productTitle)
-    formData.append("productImage", this.state.productImage)
-    formData.append("productDescription", this.state.productDescription)
-    formData.append("productDepartment", this.state.productDepartment)
-    formData.append("productCost", this.state.productCost)
+   
+    API.postAd({
+      owner: this.props.user,
+      productTitle: this.state.productTitle,
+      productImage: this.state.productImage,
+      productDescription: this.state.productDescription,
+      productDepartment: this.state.productDepartment,
+      productCost: this.state.productCost,
 
-    formData.append("locationCity", this.state.locationCity)
-    formData.append("locationState", this.state.locationState)
+      locationCity: this.state.locationCity,
+      locationState: this.state.locationState,
 
-    formData.append("sellerContactName", this.state.sellerContactName)
-    formData.append("sellerContactPhone", this.state.sellerContactPhone)
-    formData.append("sellerContactEmail", this.state.sellerContactEmail)
-  const config = {
-      header: {
-        "content-type": "multipart/form-data"
-      }
-    };
-    Axios.post("/api/images",formData,config)
-    .then((response) => {
-      console.log(response)
-        alert("The file is successfully uploaded");
-    }).catch((error) => {
-      console.log(error);
-});    
-    // API.postAd({
-    //   owner: this.props.user,
-    //   productTitle: this.state.productTitle,
-    //   productImage: this.state.productImage,
-    //   productDescription: this.state.productDescription,
-    //   productDepartment: this.state.productDepartment,
-    //   productCost: this.state.productCost,
+      sellerContactName: this.state.sellerContactName,
+      sellerContactPhone: this.state.sellerContactPhone,
+      sellerContactEmail: this.state.sellerContactEmail,
+    }).then(results => {
+      this.setState({
+        productTitle: "",
+        productImage: "",
+        productDescription: "",
+        productCost: "",
 
-    //   locationCity: this.state.locationCity,
-    //   locationState: this.state.locationState,
+        locationCity: "",
+        locationState: "",
 
-    //   sellerContactName: this.state.sellerContactName,
-    //   sellerContactPhone: this.state.sellerContactPhone,
-    //   sellerContactEmail: this.state.sellerContactEmail,
-    // }).then(results => {
-    //   this.setState({
-    //     productTitle: "",
-    //     productImage: "",
-    //     productDescription: "",
-    //     productCost: "",
-
-    //     locationCity: "",
-    //     locationState: "",
-
-    //     sellerContactName: "",
-    //     sellerContactPhone: "",
-    //     sellerContactEmail: "",
-    //     message: "Item added Successfully"
-    //   });
-    // }).catch(err => console.log(err));
+        sellerContactName: "",
+        sellerContactPhone: "",
+        sellerContactEmail: "",
+        message: "Item added Successfully"
+      });
+    }).catch(err => console.log(err));
 
 
   };
@@ -135,24 +110,25 @@ class Form extends Component {
 
           <label>Title (required)</label>
           <Input
-            value={this.state.productTitle}
+            value={this.state.productTitle || this.props.title}
             name="productTitle"
             onChange={this.handleInputChange}
             type="text"
             required
+            maxlength = "30"
             placeholder="Product Title"
           />
           <label>Image (required)</label>
           <Input
             name="productImage"
-            onChange={this.handleFileChange}
-            type="file"
+            onChange={this.handleInputChange}
+            type="text"
             required
             placeholder="Product Image"
           />
           <label>Description (required)</label>
           <TextArea
-            value={this.state.productDescription}
+            value={this.state.productDescription || this.props.description}
             name="productDescription"
             onChange={this.handleInputChange}
             type="text"
@@ -161,7 +137,7 @@ class Form extends Component {
           />
           <label>Department (required)</label>
           <Input
-            value={this.state.productDepartment}
+            value={this.state.productDepartment || this.props.department}
             name="productDepartment"
             list="department"
             onChange={this.handleInputChange}
@@ -178,18 +154,18 @@ class Form extends Component {
           </datalist>
           <label>Price (required)</label>
           <Input
-            value={this.state.productCost}
+            value={this.state.productCost || this.props.cost}
             name="productCost"
             onChange={this.handleInputChange}
             type="text"
-            pattern="[0-9]{1,}"
+            pattern="[0-9.]{1,}"
             placeholder="Price"
             required
             title="Please enter numeric value"
           />
           <label>State (required)</label>
           <Input
-            value={this.state.locationState}
+            value={this.state.locationState || this.props.state}
             name="locationState"
             list="state"
             onChange={this.handleInputChange}
@@ -207,7 +183,7 @@ class Form extends Component {
 
           <label>City (required)</label>
           <Input
-            value={this.state.locationCity}
+            value={this.state.locationCity || this.props.city}
             name="locationCity"
             list="city"
             onChange={this.handleInputChange}
@@ -227,7 +203,7 @@ class Form extends Component {
 
           <label>Contact Name (required)</label>
           <Input
-            value={this.state.sellerContactName}
+            value={this.state.sellerContactName || this.props.name}
             name="sellerContactName"
             onChange={this.handleInputChange}
             type="text"
@@ -236,7 +212,7 @@ class Form extends Component {
           />
           <label>Contact Email (required)</label>
           <Input
-            value={this.state.sellerContactEmail}
+            value={this.state.sellerContactEmail || this.props.email}
             name="sellerContactEmail"
             required
             onChange={this.handleInputChange}
@@ -245,7 +221,7 @@ class Form extends Component {
           />
           <label>Contact Phone</label>
           <Input
-            value={this.state.sellerContactPhone}
+            value={this.state.sellerContactPhone || this.props.phone}
             name="sellerContactPhone"
             onChange={this.handleInputChange}
             type="text"
@@ -254,7 +230,7 @@ class Form extends Component {
             title="Please enter numeric value"
           />
 
-          <button type="submit" className="btn btn-success">Submit</button>
+          <button type="submit" className="btn btn-success" id="login-page-btn">Submit</button>
           <p className="text-success">{this.state.message}</p>
         </form>
       </div>

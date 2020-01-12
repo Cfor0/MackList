@@ -3,8 +3,9 @@ import axios from 'axios'
 import Wrapper from "../components/Wrapper"
 import { Input, TextArea, FormBtn } from "../components/input";
 import API from "../utils/API";
-const bcrypt = require('bcryptjs');
+import okapi from "./styles/okapi.png"
 
+const bcrypt = require('bcryptjs');
 
 class Navbar extends Component {
 
@@ -19,6 +20,13 @@ class Navbar extends Component {
     error:""
   }
 
+  mystyle = {
+    
+    color: "rgb(235, 237, 217)"
+          
+    };
+
+ 
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -86,27 +94,44 @@ class Navbar extends Component {
     const user = this.props.user;
     return (
       <Wrapper>
-        <div>
-          <nav className="navbar navbar-light bg-light">
-            <h1><a className="navbar-brand" href="/">Macklist</a></h1>
+        <div className="bg-pattern">
+          <nav 
+          id="nav-style"
+          // style = {this.mystyle} 
+          className="navbar navbar-dark">
+            <div className="row w-100">
+              <div className="col-sm-2">
+          <img 
+          height="100px"
+          width="90px"
+          src={okapi} 
+          alt="okapi"/>
+          </div>
+          <div className="col-sm-7">
+            <h1> <a 
+            // style = {this.mystyle} 
+            className="navbar-brand" 
+            href="/">Macklist
+            </a> </h1>
+            </div>
+            <div className="col-sm-3 text-right pt-4">
             {loggedIn ?
-              <div>
-                <div className="pos-f-t">
-                  <nav className="navbar navbar-white bg-white">
-                    <span className="mr-2">Welcome {user}! </span>
+              <div id ="login-btn1">
+                <div>
+                    <span className="mr-2">Welcome {user}!</span>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span className="navbar-toggler-icon"></span>
                     </button>
-                  </nav>
-
                 </div>
               </div>
               :
-              <a href="/login" className="btn btn-outline-success">LogIn / SignUp</a>}
+              <a href="/login" id ="login-btn" className="btn">Log In/Sign Up</a>}
+              </div>
+              </div>
           </nav>
           {loggedIn ?
             <div className="collapse" id="navbarToggleExternalContent">
-              <div className="bg-white p-4">
+              <div className="p-4 text-right">
                 <a className="text-dark h4" href="/user-post">My Profile</a><br />
                 <a className="text-dark h4" href="#" data-toggle="modal" data-target="#changeusername" onClick={this.clearError}>Change Username</a><br />
                 <a className="text-dark h4" href="#" data-toggle="modal" data-target="#changepassword" onClick={this.clearError}>Change Password</a><br />
@@ -140,9 +165,9 @@ class Navbar extends Component {
                         required
                         title="Username can only contain Uppercase, Lowercase or number and atleast 6 or more characters"
                     />
-                    <button type="submit" className="btn btn-success mb-2">Change Username</button>
+                    <button type="submit" className="btn btn-success mb-2" id="user-reset-btn">Change Username</button>
               <div>
-              <FormBtn data-dismiss="modal">Close</FormBtn>
+              <FormBtn data-dismiss="modal" id="close-btn1">Close</FormBtn>
               </div>
                 </form>
               </div>
@@ -174,9 +199,9 @@ class Navbar extends Component {
                         title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                         required
                     />
-                    <button type="submit" className="btn btn-success mb-2">Change Password</button>
+                    <button type="submit" className="btn btn-success mb-2" id="pw-reset-btn">Change Password</button>
               <div>
-              <FormBtn data-dismiss="modal">Close</FormBtn>
+              <FormBtn data-dismiss="modal" id="close-btn">Close</FormBtn>
               </div>
                 </form>
               </div>

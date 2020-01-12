@@ -7,7 +7,7 @@ const adController = require("../../controllers/adController");
 router.route("/")
   .post(adController.create)
   .get(adController.findAll)
-  //.put(adController.findLowPrice)
+  .put(adController.updateAd)
 
 // Matches with "/api/ads/:id"
 router

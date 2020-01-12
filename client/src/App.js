@@ -8,8 +8,7 @@ import ForgotPassword from "./pages/forgotPassword"
 import Navbar from "./components/Navbar"
 import axios from "axios"
 import UserPost from "./pages/user-post";
-// import Post from "./pages/post";
-// import UserPost from "./pages/user-post";
+
 class App extends Component {
   constructor() {
     super()
@@ -58,10 +57,7 @@ render() {
   return (
 <div className="App">
     <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} user={this.state.username}/>
-         {/* greet user if logged in: */}
-        {/* {this.state.loggedIn &&
-          <p>Join the party, {this.state.username}!</p>
-        } */}
+       
     <Router>
       <div>
         <Switch>
@@ -78,9 +74,6 @@ render() {
           />} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/forgotPassword" component={ForgotPassword} />
-          {/* <Route exact path="/user/post" component={UserPost} />
-          <Route exact path="/post" component={Post} /> */}
-          {/* <Route component={NoMatch} /> */}
         </Switch>
         </div>
         </Router>

@@ -58,7 +58,7 @@ class ForgotPassword extends Component {
     render() {
         return (
             <Wrapper>
-                <h1 className="text-center">Forgot Password?</h1><br />
+                <h2 className="text-center pt-3">Forgot Password?</h2><br />
                 <h5 className="text-center">Please enter the email address associated to your account!</h5>
                 <div className="mx-5">
                     <Col>
@@ -74,7 +74,7 @@ class ForgotPassword extends Component {
                                 required
                                 title="Must be in the following order: characters@characters.domain"
                             />
-                            <button type="submit" className="btn btn-success mb-2">Submit Request</button>
+                            <button type="submit" id="login-page-btn" className="btn btn-success mb-2">Submit Request</button>
                         </form>
                     </Col>
                 </div>

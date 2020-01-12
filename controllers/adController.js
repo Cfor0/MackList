@@ -51,5 +51,12 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  updateAd: function (req,res){
+    console.log(req.body)
+    db.Ad.updateOne({_id: req.body.id},{$set:{productTitle: req.body.productTitle, productImage: req.body.productImage,
+      productDescription: req.body.productDescription,productCost: req.body.productCost}})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   }
 };
